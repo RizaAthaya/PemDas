@@ -76,12 +76,10 @@ public class BuatMethod {
 		System.out.print("Berapa yang anda bayarkan? (tuliskan nominal saja) : ");
 		int bayar = baru.nextInt();
 		int kembalian = bayar - totalHarga;
-		while (kembalian < 0) {
-			System.out.println("\nKURANG WOI. YANG BENER -_- ");
-			System.out.print("Masukin uang tambahannya! (nominal saja) : ");
-			bayar += baru.nextInt();
-			kembalian = bayar - totalHarga;
+		if (kembalian<0){
+			kembalian = kembalianrekursif(totalHarga, kembalian, bayar);
 		}
+		
 		int awal = kembalian;
 		int[] nominal = { 100000, 50000, 20000, 10000, 5000, 2000, 1000, 500, 200, 100 };
 		while (kembalian >= 100) {
@@ -108,5 +106,17 @@ public class BuatMethod {
 		if (kembalian<100 && kembalian>0) {
 			System.out.println("Tidak ada uang bernominal kurang dari 100 rupiah :)");
 		}
+	}
+
+	private static int kembalianrekursif(int totalHarga, int kembalian, int bayar) {
+		if (kembalian>0) {
+			return kembalian;
+		}
+		System.out.println("\nKURANG WOI. YANG BENER -_- ");
+		System.out.print("Masukin uang tambahannya! (nominal saja) : ");
+		bayar += baru.nextInt();
+		kembalian = bayar - totalHarga;
+		return kembalianrekursif(totalHarga, kembalian, bayar);
+		
 	}
 }
